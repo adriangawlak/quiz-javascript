@@ -8,7 +8,7 @@ const pytanie = document.getElementById("trescPytania")
 const odpowiedzi = document.getElementById("odpowiedzi")
 przyciskStart.addEventListener("click", rozpocznijGre)
 
-// zmienne
+// zmienne globalne
 var wybranaOdp
 var aktualnePytanie
 var punkty = 0
@@ -20,7 +20,6 @@ function rozpocznijGre() {
     ekranStartowy.style.display = "none";
     ekranQuizu.style.display = "block";
     nastepnePytanie()
-
 }
 
 function nastepnePytanie() {
@@ -48,10 +47,10 @@ function nastepnePytanie() {
 } 
 
 function wybierzOdpowiedz(button) {
-    var selected = button.classList.contains("selected");
-    deselectAllButtons();
-    if (!selected) {
-      button.classList.add("selected");
+    var zaznaczona = button.classList.contains("zaznaczona");
+    odznaczOdpowiedzi();
+    if (!zaznaczona) {
+      button.classList.add("zaznaczona");
       wybranaOdp = button.innerText;
     } else {
       wybranaOdp = null;
@@ -59,17 +58,10 @@ function wybierzOdpowiedz(button) {
     przyciskNastepne.addEventListener("click", sprawdzOdpowiedz);
   }
 
-// function wybierzOdpowiedz(event) {
-//     wybranaOdp = event.target.innerText;
-//     deselectAllButtons();
-//     event.target.classList.add("selected");
-//     przyciskNastepne.addEventListener("click", sprawdzOdpowiedz);
-//   }
-
-function deselectAllButtons() {
-    var buttons = odpowiedzi.getElementsByClassName("element");
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove("selected");
+function odznaczOdpowiedzi() {
+    var warianty = odpowiedzi.getElementsByClassName("element");
+    for (var i = 0; i < warianty.length; i++) {
+        warianty[i].classList.remove("zaznaczona");
     }
 }
 
